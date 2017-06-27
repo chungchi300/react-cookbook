@@ -4,4 +4,4 @@ _Implement modular and transparent Front End Application_
 
 ## React
 
-[General Component](react/network-component.md)
+[General Component](react/general.md)
