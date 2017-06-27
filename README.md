@@ -1,4 +1,4 @@
-# SPA Front End Cookbook(Redux,React)
+# SPA Cookbook(Redux,React)
 
 _Implement modular and transparent Front End Application_
 
