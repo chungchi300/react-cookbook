@@ -2,7 +2,7 @@
 
 ## Index
 
--   [Declaration of component](#Declaration-of-omponent)
+-   [Declaration of component](#Declaration-of-component)
 -   [计算属性](#计算属性)
 -   [事件回调命名](#事件回调命名)
 -   [组件化优于多层 render](#组件化优于多层-render)
@@ -14,7 +14,7 @@
 -   [使用 Props 初始化](#使用-props-初始化)
 -   [classnames](#classnames)
 
-* * *
+<a name="Declaration-of-component"/>
 
 ## Declaration of Component
 
