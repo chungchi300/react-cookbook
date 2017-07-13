@@ -1,8 +1,8 @@
 # React Cookbook
 
-## List
+## Index
 
--   [组件声明](#组件声明)
+-   [Declaration of component](#Declaration-of-omponent)
 -   [计算属性](#计算属性)
 -   [事件回调命名](#事件回调命名)
 -   [组件化优于多层 render](#组件化优于多层-render)
@@ -16,63 +16,60 @@
 
 * * *
 
-## 组件声明
+## Declaration of Component
 
-全面使用 ES6 class 声明，可不严格遵守该属性声明次序，但如有 propTypes 则必须写在顶部， lifecycle events 必须写到一起。
+Use ES6 class to declare component in following[Transform Babel class properties is a must](http://babeljs.io/docs/plugins/transform-class-properties/)
 
 -   class
     -   propTypes
     -   defaultPropTypes
     -   constructor
-        -   event handlers (如不使用[类属性](http://babeljs.io/docs/plugins/transform-class-properties/)语法可在此声明)
-    -   lifecycle events
+        -   state declaration
+    -   lifecycle events(shouldComponetUpdate,componentWillMount,componentDidMount...)
+    -   computeFunc(getters,isXX)
     -   event handlers
-    -   getters
     -   render
 
 ```javascript
 class Person extends React.Component {
   static propTypes = {
     firstName: PropTypes.string.isRequired,
-    lastName: PropTypes.string.isRequired
+    lastName: PropTypes.string.isRequired,
+    gender: PropTypes.string,
+  }
+  static defaultProps = {
+    gender: 'M'
   }
   constructor (props) {
-    super(props)
-
+    super(props);
     this.state = { smiling: false }
-
-    /* 若不能使用 babel-plugin-transform-class-properties
-    this.handleClick = () => {
-      this.setState({smiling: !this.state.smiling})
-    }
-    */
   }
 
   componentWillMount () {}
 
   componentDidMount () {}
 
-  // ...
-
+  get fullName () {
+    return firstName + lastName;
+  }
+  get isMan(){
+    return this.state.gender == 'M';
+  }
   handleClick = () => {
     this.setState({smiling: !this.state.smiling})
-  }
-
-  get fullName () {
-    return this.props.firstName + this.props.lastName
   }
 
   render () {
     return (
       <div onClick={this.handleClick}>
-        {this.fullName} {this.state.smiling ? 'is smiling.' : ''}
+        {this.fullName} {this.state.smiling ? 'is smiling.' : ''} to you.And who is a {this.isMan?' man':'woman'}
       </div>
     )
   }
 }
 ```
 
-**[⬆ 回到目录](#目录)**
+**[⬆ Back to index](#index)**
 
 ## 计算属性
 
@@ -191,6 +188,106 @@ render () {
   )
 }
 ```
+
+**Exception set state in same level**
+
+```javascript
+class AdvboomDollarField extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            advboomDollar: 0
+        };
+    }
+    renderApply(advboomDollarChange) {
+        return (
+            <Row>
+
+                <Col mdOffset={2} md={10}>
+                    <button
+                        onClick={() =>
+                            advboomDollarChange(this.state.advboomDollar)}
+                        className="second medium"
+                    >
+                        套用
+                    </button>
+                </Col>
+
+            </Row>
+        );
+    }
+    renderDisApply(advboomDollarChange) {
+        return (
+            <Row>
+
+                <Col mdOffset={2} md={10}>
+                    <button
+                        onClick={() => {
+                            this.setState({advboomDollar: 0});
+                            advboomDollarChange(0);
+                        }}
+                        className="prim medium"
+                    >
+                        取消
+                    </button>
+                </Col>
+
+            </Row>
+        );
+    }
+    render() {
+        let {user, payment, advboomDollarChange} = this.props;
+        let applyOption = payment.advboomDollar
+            ? this.renderDisApply(advboomDollarChange)
+            : this.renderApply(advboomDollarChange);
+        return (
+            <div>
+                <PlainField
+                    meta={{
+                        touched: false,
+                        error: false,
+                        warning: false
+                    }}
+                    type="text"
+                    input={{
+                        value: Helpers.Common.presentNumber(
+                            this.state.advboomDollar
+                        ),
+                        onChange: event => {
+                            this.setState({
+                                advboomDollar: _.clamp(
+                                    Helpers.Common.parseFloat(
+                                        event.target.value
+                                    ),
+                                    _.min([user.advboomDollar, payment.total])
+                                )
+                            });
+                        }
+                    }}
+                    disabled={Boolean(payment.advboomDollar)}
+                    preExistedHelpBlock
+                    sameline={true}
+                    label={'Advboom$ 付款' + '\n尚餘$' + user.advboomDollar}
+                    placeholder=""
+                />
+                <div className="form-horizontal">
+                    {applyOption}
+                </div>
+            </div>
+        );
+    }
+
+}
+```
+
+## Naming convention
+
+if vnode variable exist,must named in
+
+elementVNode
+
+elements (array)
+elementsByKey,e.g elementsById(collection by id field)
 
 **[⬆ 回到目录](#目录)**
 
@@ -498,3 +595,20 @@ render () {
 Read: [Class Name Manipulation](https://github.com/JedWatson/classnames/blob/master/README.md)
 
 **[⬆ 回到目录](#目录)**
+
+## Pass props
+
+Partial
+{...\_.pick(this.props, [
+    'currentStyle',
+    'editorVisibleFontSizes',
+    'currentEditFontSize',
+    'setCurrentEditFontSize',
+    'changeActiveElementStyle'
+])}
+
+All
+{...}
+
+Specific
+currentEditFontSize={'22'}
