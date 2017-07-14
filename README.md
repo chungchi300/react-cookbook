@@ -1,4 +1,4 @@
-# React Redux Spa Best Coding Convention
+# React Redux Spa Coding Convention
 
 _Implement modular and transparent Front End Application_
 
