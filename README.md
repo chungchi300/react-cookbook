@@ -1,4 +1,4 @@
-# SPA Cookbook(Redux,React)
+# Redux react spa coding convention && common problem best solution
 
 _Implement modular and transparent Front End Application_
 

@@ -2,9 +2,9 @@
 
 ## Index
 
--   [Declaration of component](#Declaration-of-component)
--   [计算属性](#计算属性)
--   [事件回调命名](#事件回调命名)
+-   [Declaration of component](#declaration-of-component)
+-   [compute value](#compute-value)
+-   [event handler naming](#event-handler-naming)
 -   [组件化优于多层 render](#组件化优于多层-render)
 -   [状态上移优于公共方法](#状态上移优于公共方法)
 -   [容器组件](#容器组件)
@@ -12,9 +12,10 @@
 -   [始终声明 PropTypes](#始终声明-proptypes)
 -   [Props 非空检测](#props-非空检测)
 -   [使用 Props 初始化](#使用-props-初始化)
+-   [File naming](#file-naming)
 -   [classnames](#classnames)
 
-<a name="Declaration-of-component"/>
+<a name="declaration-of-component"/>
 
 ## Declaration of Component
 
@@ -71,11 +72,12 @@ class Person extends React.Component {
 
 **[⬆ Back to index](#index)**
 
-## 计算属性
+<a name="compute-value"/>
+## Compute value
 
-使用 getters 封装 render 所需要的状态或条件的组合
+use getter for computed properties in rendering
 
-对于返回 boolean 的 getter 使用 is- 前缀命名
+For getter that return boolean,use is- as prefixer
 
 ```javascript
   // bad
@@ -109,15 +111,16 @@ class Person extends React.Component {
   }
 ```
 
-**[⬆ 回到目录](#目录)**
+**[⬆ Back to index](#index)**
 
-## 事件回调命名
+<a name="event-handler-naming"/>
+## Event handler naming
 
-Handler 命名风格:
+Handler naming style:
 
--   使用 `handle` 开头
--   以事件类型作为结尾 (如 `Click`, `Change`)
--   使用一般现在时
+-   begines with `handle`
+-   ends with event type (like `Click`, `Change`)
+-   use present tense
 
 ```javascript
 // bad
@@ -137,9 +140,9 @@ render () {
 }
 ```
 
-如果你需要区分同样事件类型的 handler（如 `handleNameChange` 和 `handleEmailChange`）时，可能这就是一个拆分组件的信号
+if you same type of event handler but different naming,(like `handleNameChange` and `handleEmailChange`),that may be a signal to break down component
 
-**[⬆ 回到目录](#目录)**
+**[⬆ Back to index](#index)**
 
 ## 组件化优于多层 render
 
@@ -289,7 +292,7 @@ elementVNode
 elements (array)
 elementsByKey,e.g elementsById(collection by id field)
 
-**[⬆ 回到目录](#目录)**
+**[⬆ Back to index](#index)**
 
 ## 状态上移优于公共方法
 
@@ -475,7 +478,7 @@ MessageList.propTypes = {
 -   [Presentational and Container Components](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.sz7z538t6)
 -   [React AJAX Best Practices](http://andrewhfarmer.com/react-ajax-best-practices/)
 
-**[⬆ 回到目录](#目录)**
+**[⬆ Back to index](#index)**
 
 ## 纯函数的 render
 
@@ -495,7 +498,7 @@ render () {
 
 更多阅读: [Return as soon as you know the answer](https://medium.com/@SimonRadionov/return-as-soon-as-you-know-the-answer-dec6369b9b67#.q67w8z60g)
 
-**[⬆ 回到目录](#目录)**
+**[⬆ Back to index](#index)**
 
 ## 始终声明 PropTypes
 
@@ -507,7 +510,7 @@ render () {
 
 更多阅读: [Prop Validation](http://facebook.github.io/react/docs/reusable-components.html#prop-validation)
 
-**[⬆ 回到目录](#目录)**
+**[⬆ Back to index](#index)**
 
 ## Props 非空检测
 
@@ -541,7 +544,7 @@ MyComponent.defaultProps = {
 
 如有必要，使用 PropTypes.shape 明确指定需要的属性
 
-**[⬆ 回到目录](#目录)**
+**[⬆ Back to index](#index)**
 
 ## 使用 Props 初始化
 
@@ -567,7 +570,7 @@ constructor (props) {
 
 更多阅读: ["Props in getInitialState Is an Anti-Pattern"](http://facebook.github.io/react/tips/props-in-getInitialState-as-anti-pattern.html)
 
-**[⬆ 回到目录](#目录)**
+**[⬆ Back to index](#index)**
 
 ## classnames
 
@@ -594,7 +597,19 @@ render () {
 
 Read: [Class Name Manipulation](https://github.com/JedWatson/classnames/blob/master/README.md)
 
-**[⬆ 回到目录](#目录)**
+**[⬆ Back to index](#index)**
+
+## File naming
+
+Upper camel case
+
+## Crud Related Component naming
+
+ElementCreate
+ElementEdit
+ElementList
+ElementListItem
+ElementDelete(the delete button)
 
 ## Pass props
 
