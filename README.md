@@ -1,4 +1,4 @@
-# Redux react spa coding convention && common problem best solution
+# react redux spa coding convention
 
 _Implement modular and transparent Front End Application_
 
@@ -8,4 +8,4 @@ _Implement modular and transparent Front End Application_
 
 ## Thanks
 
-[shimohq/react-cookbook](https://github.com/shimohq/react-cookbook) provide the good concept
+[shimohq/react-cookbook](https://github.com/shimohq/react-cookbook) provide the good naming convention part for react
