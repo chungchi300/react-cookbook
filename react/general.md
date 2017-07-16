@@ -5,7 +5,7 @@
 -   [Declaration of component](#declaration-of-component)
 -   [compute value](#compute-value)
 -   [event handler naming](#event-handler-naming)
--   [组件化优于多层 render](#组件化优于多层-render)
+-   [Divide to multiple component better then multiple render in component](#component-better-then-nest-render)
 -   [状态上移优于公共方法](#状态上移优于公共方法)
 -   [容器组件](#容器组件)
 -   [纯函数的 render](#纯函数的-render)
@@ -144,9 +144,11 @@ if you same type of event handler but different naming,(like `handleNameChange` 
 
 **[⬆ Back to index](#index)**
 
-## 组件化优于多层 render
+## Divide to multiple component better then multiple render in component
 
-当组件的 jsx 只写在一个 render 方法显得太臃肿时，很可能更适合拆分出一个组件，视情况采用 class component 或 stateless component
+<a name="component-better-then-nest-render" />
+
+When componet jsx in one render looks too cumbersome,it is better then divide to another component instead of one more render function.It can be es6 class syntax or functional stateless component(depends on the state).
 
 ```javascript
 // bad
@@ -192,105 +194,7 @@ render () {
 }
 ```
 
-**Exception set state in same level**
-
-```javascript
-class AdvboomDollarField extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            advboomDollar: 0
-        };
-    }
-    renderApply(advboomDollarChange) {
-        return (
-            <Row>
-
-                <Col mdOffset={2} md={10}>
-                    <button
-                        onClick={() =>
-                            advboomDollarChange(this.state.advboomDollar)}
-                        className="second medium"
-                    >
-                        套用
-                    </button>
-                </Col>
-
-            </Row>
-        );
-    }
-    renderDisApply(advboomDollarChange) {
-        return (
-            <Row>
-
-                <Col mdOffset={2} md={10}>
-                    <button
-                        onClick={() => {
-                            this.setState({advboomDollar: 0});
-                            advboomDollarChange(0);
-                        }}
-                        className="prim medium"
-                    >
-                        取消
-                    </button>
-                </Col>
-
-            </Row>
-        );
-    }
-    render() {
-        let {user, payment, advboomDollarChange} = this.props;
-        let applyOption = payment.advboomDollar
-            ? this.renderDisApply(advboomDollarChange)
-            : this.renderApply(advboomDollarChange);
-        return (
-            <div>
-                <PlainField
-                    meta={{
-                        touched: false,
-                        error: false,
-                        warning: false
-                    }}
-                    type="text"
-                    input={{
-                        value: Helpers.Common.presentNumber(
-                            this.state.advboomDollar
-                        ),
-                        onChange: event => {
-                            this.setState({
-                                advboomDollar: _.clamp(
-                                    Helpers.Common.parseFloat(
-                                        event.target.value
-                                    ),
-                                    _.min([user.advboomDollar, payment.total])
-                                )
-                            });
-                        }
-                    }}
-                    disabled={Boolean(payment.advboomDollar)}
-                    preExistedHelpBlock
-                    sameline={true}
-                    label={'Advboom$ 付款' + '\n尚餘$' + user.advboomDollar}
-                    placeholder=""
-                />
-                <div className="form-horizontal">
-                    {applyOption}
-                </div>
-            </div>
-        );
-    }
-
-}
-```
-
-## Naming convention
-
-if vnode variable exist,must named in
-
-elementVNode
-
-elements (array)
-elementsByKey,e.g elementsById(collection by id field)
+P.S:Exception:multiple render layer in same component is acceptable when they share same state and need to setState in same component(but it worth to consider to put them in redux store).
 
 **[⬆ Back to index](#index)**
 
@@ -627,3 +531,15 @@ All
 
 Specific
 currentEditFontSize={'22'}
+
+
+
+
+## Naming convention
+
+if vnode variable exist,must named in
+
+elementVNode
+
+elements (array)
+elementsByKey,e.g elementsById(collection by id field)
