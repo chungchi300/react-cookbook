@@ -6,7 +6,7 @@
 -   [compute value](#compute-value)
 -   [event handler naming](#event-handler-naming)
 -   [Divide to multiple component better then multiple render in component](#component-better-then-nest-render)
--   [状态上移优于公共方法](#状态上移优于公共方法)
+-   [Move state to upper component better then provide public method](#move-state-to-upper-component-better-then-public-method)
 -   [容器组件](#容器组件)
 -   [纯函数的 render](#纯函数的-render)
 -   [始终声明 PropTypes](#始终声明-proptypes)
@@ -198,11 +198,13 @@ P.S:Exception:multiple render layer in same component is acceptable when they sh
 
 **[⬆ Back to index](#index)**
 
-## 状态上移优于公共方法
+<a name="move-state-to-upper-component-better-then-public-method" />
 
-一般组件不应提供公共方法，这样会破坏数据流只有一个方向的原则。
+## Move state to upper component(or redux) better then provide public method
 
-再因为我们倾向于更细颗粒的组件化，状态应集中在远离渲染的地方处理（比如应用级别的状态就在 redux 的 store 里），也能使兄弟组件更方便地共享。
+Component should not provide public method for modifying it's own state because it will destroy one way dataflow principle of react.
+
+Therefore,the component state can move to upper component(or better,the redux store).It help all react component to share this state easily.
 
 ```javascript
 //bad
@@ -283,7 +285,7 @@ class MyComponent extends Component {
 }
 ```
 
-更多阅读: [lifting-state-up](https://facebook.github.io/react/docs/lifting-state-up.html)
+Read More: [lifting-state-up](https://facebook.github.io/react/docs/lifting-state-up.html)
 
 ## 容器组件
 
