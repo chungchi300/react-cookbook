@@ -7,7 +7,7 @@
 -   [event handler naming](#event-handler-naming)
 -   [Divide to multiple component better then multiple render in component](#component-better-then-nest-render)
 -   [Move state to upper component better then provide public method](#move-state-to-upper-component-better-then-public-method)
--   [容器组件](#容器组件)
+-   [Container component](#container-componet)
 -   [纯函数的 render](#纯函数的-render)
 -   [始终声明 PropTypes](#始终声明-proptypes)
 -   [Props 非空检测](#props-非空检测)
@@ -287,11 +287,15 @@ class MyComponent extends Component {
 
 Read More: [lifting-state-up](https://facebook.github.io/react/docs/lifting-state-up.html)
 
-## 容器组件
+**[⬆ Back to index](#index)**
 
-一个容器组件主要负责维护状态和数据的计算，本身并没有界面逻辑，只把结果通过 props 传递下去。
+<a name="container-componet" />
 
-区分容器组件的目的就是可以把组件的状态和渲染解耦开来，改写界面时可不用关注数据的实现，顺便得到了可复用性。
+## Container component
+
+Container only maintain state ,it don't have presentation logic(no div,class,style...etc).All container do is pass state and handler of state to presentation component by props.
+
+The advantage of seperate container component and presentational component is when we change the presentation logic without consider the data change.It increase the modularization and reusability.
 
 ```javascript
 // bad
@@ -379,7 +383,7 @@ MessageList.propTypes = {
 }
 ```
 
-更多阅读:
+Read More:
 
 -   [Presentational and Container Components](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0#.sz7z538t6)
 -   [React AJAX Best Practices](http://andrewhfarmer.com/react-ajax-best-practices/)
