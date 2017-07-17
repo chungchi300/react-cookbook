@@ -8,8 +8,8 @@
 -   [Divide to multiple component better then multiple render in component](#component-better-then-nest-render)
 -   [Move state to upper component better then provide public method](#move-state-to-upper-component-better-then-public-method)
 -   [Container component](#container-componet)
--   [纯函数的 render](#纯函数的-render)
--   [始终声明 PropTypes](#始终声明-proptypes)
+-   [Render function must be pure](#pure-render)
+-   [Always declare propTypes](#always-declare-proptypes)
 -   [Props 非空检测](#props-非空检测)
 -   [使用 Props 初始化](#使用-props-初始化)
 -   [File naming](#file-naming)
@@ -390,9 +390,11 @@ Read More:
 
 **[⬆ Back to index](#index)**
 
-## 纯函数的 render
+<a name="pure-render"/>
 
-render 函数应该是一个纯函数（stateless component 当然也是），不依赖 this.state、this.props 以外的变量，也不改变外部状态
+## Render function must be pure
+
+Render function should be pure function(also the stateless component),only rely on this.state,this.props.It also don't produce side effect to environment.
 
 ```javascript
 // bad
@@ -406,19 +408,25 @@ render () {
 }
 ```
 
-更多阅读: [Return as soon as you know the answer](https://medium.com/@SimonRadionov/return-as-soon-as-you-know-the-answer-dec6369b9b67#.q67w8z60g)
+Read more:
+
+-   [What is pure function](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-a-pure-function-d1c076bec976)
+
+-   [Return as soon as you know the answer](https://medium.com/@SimonRadionov/return-as-soon-as-you-know-the-answer-dec6369b9b67#.q67w8z60g)
 
 **[⬆ Back to index](#index)**
 
-## 始终声明 PropTypes
+<a name="always-declare-proptypes" />
 
-每一个组件都声明 PropTypes，非必须的 props 应提供默认值。
+## Always declare propTypes
 
-对于非常广为人知的 props 如 children, dispatch 也不应该忽略。因为如果一个组件没有声明 dispatch 的 props，那么一眼就可以知道该组件没有修改 store 了。
+Every component should declare proptype,not required props should provide default value(by defaultProps).
 
-但如果在开发一系列会 dispatch 的组件时，可在这些组件的目录建立单独的 .eslintrc 来只忽略 dispatch。
+Also the well-known props like children(if the component has children) and handler(onClick,onEdit) should not be ignore.Because the children props help up to known component has children and the handler props help us to known component dispatch action to store.
 
-更多阅读: [Prop Validation](http://facebook.github.io/react/docs/reusable-components.html#prop-validation)
+Read More:
+
+[Prop Validation](http://facebook.github.io/react/docs/reusable-components.html#prop-validation)
 
 **[⬆ Back to index](#index)**
 
@@ -537,9 +545,6 @@ All
 
 Specific
 currentEditFontSize={'22'}
-
-
-
 
 ## Naming convention
 
