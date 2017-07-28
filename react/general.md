@@ -10,8 +10,7 @@
 -   [Container component](#container-componet)
 -   [Render function must be pure](#pure-render)
 -   [Always declare propTypes](#always-declare-proptypes)
--   [Props 非空检测](#props-非空检测)
--   [使用 Props 初始化](#使用-props-初始化)
+-   [Use props to initial state](#use-props-to-initial-state)
 -   [File naming](#file-naming)
 -   [classnames](#classnames)
 
@@ -420,19 +419,10 @@ Read more:
 
 ## Always declare propTypes
 
-Every component should declare proptype,not required props should provide default value(by defaultProps).
+### Every component should declare proptype,not required props should provide default value(by defaultProps).
 
-Also the well-known props like children(if the component has children) and handler(onClick,onEdit) should not be ignore.Because the children props help up to known component has children and the handler props help us to known component dispatch action to store.
-
-Read More:
-
-[Prop Validation](http://facebook.github.io/react/docs/reusable-components.html#prop-validation)
-
-**[⬆ Back to index](#index)**
-
-## Props 非空检测
-
-对于并非 `isRequired` 的 proptype，必须对应设置 defaultProps，避免再增加 if 分支带来的负担
+Adv:
+Not if checking in render function for existence
 
 ```javascript
 // bad
@@ -460,13 +450,27 @@ MyComponent.defaultProps = {
 }
 ```
 
-如有必要，使用 PropTypes.shape 明确指定需要的属性
+### If the component has children,it should be mention in proptypes
+
+Adv:
+Component has children in normal usage.
+
+### If the component has handler,it should be mention in proptypes
+
+Adv:
+Component can distribute action to change state.
+
+Read More:
+
+[Prop Validation](http://facebook.github.io/react/docs/reusable-components.html#prop-validation)
 
 **[⬆ Back to index](#index)**
 
-## 使用 Props 初始化
+<a name="use-props-to-initial-state" />
 
-除非 props 的命名明确指出了意图，否则不该使用 props 来初始化 state
+## Use props to initial state
+
+Props can be used to initial state only when props name say so.
 
 ```javascript
 // bad
@@ -486,13 +490,15 @@ constructor (props) {
 }
 ```
 
-更多阅读: ["Props in getInitialState Is an Anti-Pattern"](http://facebook.github.io/react/tips/props-in-getInitialState-as-anti-pattern.html)
+["Props in getInitialState Is an Anti-Pattern"](http://facebook.github.io/react/tips/props-in-getInitialState-as-anti-pattern.html)
 
 **[⬆ Back to index](#index)**
 
+<a name="classnames" />
+
 ## classnames
 
-使用 [classNames](https://www.npmjs.com/package/classnames) 来组合条件结果.
+use [classNames](https://www.npmjs.com/package/classnames) to generate classname.
 
 ```javascript
 // bad
@@ -516,41 +522,3 @@ render () {
 Read: [Class Name Manipulation](https://github.com/JedWatson/classnames/blob/master/README.md)
 
 **[⬆ Back to index](#index)**
-
-## File naming
-
-Upper camel case
-
-## Crud Related Component naming
-
-ElementCreate
-ElementEdit
-ElementList
-ElementListItem
-ElementDelete(the delete button)
-
-## Pass props
-
-Partial
-{...\_.pick(this.props, [
-    'currentStyle',
-    'editorVisibleFontSizes',
-    'currentEditFontSize',
-    'setCurrentEditFontSize',
-    'changeActiveElementStyle'
-])}
-
-All
-{...}
-
-Specific
-currentEditFontSize={'22'}
-
-## Naming convention
-
-if vnode variable exist,must named in
-
-elementVNode
-
-elements (array)
-elementsByKey,e.g elementsById(collection by id field)
