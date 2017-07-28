@@ -525,6 +525,7 @@ Read: [Class Name Manipulation](https://github.com/JedWatson/classnames/blob/mas
 **[⬆ Back to index](#index)**
 
 <a name="miscellaneous" />
+
 ## Miscellaneous
 
 ### React class naming convention
