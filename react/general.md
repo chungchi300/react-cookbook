@@ -12,7 +12,8 @@
 -   [Always declare propTypes](#always-declare-proptypes)
 -   [Use props to initial state](#use-props-to-initial-state)
 -   [File naming](#file-naming)
--   [classnames](#classnames)
+-   [Classnames](#classnames)
+-   [Miscellaneous](#miscellaneous)
 
 <a name="declaration-of-component"/>
 
@@ -522,3 +523,23 @@ render () {
 Read: [Class Name Manipulation](https://github.com/JedWatson/classnames/blob/master/README.md)
 
 **[⬆ Back to index](#index)**
+
+<a name="miscellaneous" />
+## Miscellaneous
+
+### React class naming convention
+
+Upper camel case
+
+### CRUD Related Component
+
+ElementCreate
+ElementEdit
+ElementList
+ElementListItem
+ElementDelete(the delete button)
+
+### Variables
+
+elements (array)
+elementsByKey,e.g elementsById(collection by id field)
